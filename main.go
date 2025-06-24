@@ -32,11 +32,9 @@ func PongMiddleware(next http.HandlerFunc) http.HandlerFunc {
 		next(w, r)
 		return
 	}
-
 }
 
 func WebhookHandler(w http.ResponseWriter, r *http.Request) {
-
 	data, err := io.ReadAll(r.Body)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -50,11 +48,10 @@ func WebhookHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(200)
 	w.Write([]byte("recebido do webhook"))
-
 }
 
 func main() {
 	m := http.NewServeMux()
 	m.Handle("POST /webhook", PongMiddleware(http.HandlerFunc(WebhookHandler)))
-	http.ListenAndServe(":5000", m)
+	http.ListenAndServe(":10000", m)
 }
