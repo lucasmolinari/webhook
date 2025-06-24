@@ -52,6 +52,6 @@ func WebhookHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	m := http.NewServeMux()
-	m.Handle("POST /webhook", PongMiddleware(http.HandlerFunc(WebhookHandler)))
+	m.Handle("POST /", PongMiddleware(http.HandlerFunc(WebhookHandler)))
 	http.ListenAndServe(":10000", m)
 }
